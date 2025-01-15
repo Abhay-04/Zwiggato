@@ -6,8 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { CDN_URL } from "../utils/constants";
 
 function WhatsOnYourMind({ data }) {
- 
-
   const settings = {
     dots: false,
     bool: true,
@@ -24,7 +22,6 @@ function WhatsOnYourMind({ data }) {
         settings: {
           slidesToShow: 5,
 
-          
           dots: false,
         },
       },
@@ -33,7 +30,6 @@ function WhatsOnYourMind({ data }) {
         settings: {
           slidesToShow: 4,
 
-          
           dots: false,
         },
       },
@@ -41,7 +37,6 @@ function WhatsOnYourMind({ data }) {
         breakpoint: 480,
         settings: {
           slidesToShow: 3,
-         
 
           initialSlide: 2,
           rows: 2,

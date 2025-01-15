@@ -8,30 +8,6 @@ import ResCard from "./ResCard";
 import { CDN_URL } from "../utils/constants";
 
 const TopBrands = ({ data, dataT }) => {
-  
-
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "white" }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "white" }}
-        onClick={onClick}
-      />
-    );
-  }
-
   const settings = {
     dots: false,
     arrows: true,

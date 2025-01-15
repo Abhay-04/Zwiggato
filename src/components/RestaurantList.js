@@ -32,7 +32,6 @@ const RestaurantList = () => {
   const geolocationAPI = navigator.geolocation;
   const getUserCoordinates = () => {
     if (!geolocationAPI) {
-     
     } else {
       geolocationAPI.getCurrentPosition(
         (position) => {
@@ -41,9 +40,7 @@ const RestaurantList = () => {
           setLng(coords.longitude);
           listofRestaurants.length = 0;
         },
-        (error) => {
-          
-        }
+        (error) => {}
       );
     }
   };
@@ -63,12 +60,10 @@ const RestaurantList = () => {
 
       const data = await raw.json();
 
-     
       if (
         data?.data?.cards[0]?.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.seo.widgets.v1.SwiggyNotPresent"
       ) {
-        
         navigate("/locationUnservicable"); // Redirect to the error route
         return null; // Prevent further execution
       }
@@ -93,9 +88,7 @@ const RestaurantList = () => {
         data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
-    } catch (error) {
-     
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -115,7 +108,7 @@ const RestaurantList = () => {
           .toLowerCase()
           .includes(searchText.trim().toLowerCase())
     );
-    
+
     setFilteredRestaurants(filteredList);
   }, [searchText]);
 
@@ -215,12 +208,11 @@ const RestaurantList = () => {
               const aboveFourPointFiveList = listofRestaurants.filter(
                 (restaurants) => restaurants.info.avgRating >= 4.5
               );
-              
+
               setIsSecondBtnActive(!isSecondBtnActive);
               setIsThirdBtnActive(false);
 
               setFilteredRestaurants(aboveFourPointFiveList);
-             
             }}
           >
             Rating 4.5+
@@ -234,11 +226,10 @@ const RestaurantList = () => {
               const aboveFourList = listofRestaurants.filter(
                 (restaurants) => restaurants.info.avgRating > 4.0
               );
-              setIsThirdBtnActive(!isThirdBtnActive);
-              setIsSecondBtnActive(false);
+              // setIsThirdBtnActive(!isThirdBtnActive);
+              // setIsSecondBtnActive(false);
 
               setFilteredRestaurants(aboveFourList);
-              
             }}
           >
             Rating 4.0+
