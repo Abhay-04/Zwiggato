@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Load cart from localStorage
+const loadCart = () => {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart) : { items: [] };
+};
+
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    items: [],
-  },
+  initialState: loadCart(), // Load initial state from localStorage
   reducers: {
     addItem: (state, action) => {
       const item = action.payload;
@@ -13,42 +17,44 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.count += 1; // Increment count if item already exists
+        existingItem.count += 1;
       } else {
-        state.items.push({ ...item, count: 1 }); // Add new item with count 1
+        state.items.push({ ...item, count: 1 });
       }
+
+      localStorage.setItem("cart", JSON.stringify(state)); // Save to localStorage
     },
+
     removeItem: (state, action) => {
       const itemId = action.payload.id;
-      
       const existingItem = state.items.find(
         (item) => item.card.info.id === itemId
       );
-      
 
       if (existingItem) {
         if (existingItem.count > 1) {
-          existingItem.count -= 1; // Decrement count if more than 1
+          existingItem.count -= 1;
         } else {
-          // state.items = state.items.filter(
-          //   (item) => item.card.info.id !== itemId
-          // ); // Remove item if count is 1
-
-
-          
+          state.items = state.items.filter(
+            (item) => item.card.info.id !== itemId
+          );
         }
       }
+
+      localStorage.setItem("cart", JSON.stringify(state)); // Save to localStorage
     },
 
     removeEntireItem: (state, action) => {
-      // Filter out the item with the given id
       state.items = state.items.filter(
         (item) => item.card.info.id !== action.payload.id
       );
+
+      localStorage.setItem("cart", JSON.stringify(state)); // Save to localStorage
     },
 
     clearCart: (state) => {
-      state.items.length = 0;
+      state.items = [];
+      localStorage.removeItem("cart"); // Clear localStorage
     },
   },
 });
